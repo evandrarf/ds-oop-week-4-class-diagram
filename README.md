@@ -8,7 +8,7 @@ Matkul: Struktur Data dan Pemrograman Berorientasi Objek A
 
 ## Deskripsi Kasus
 
-Di ITS terdapat proses evaluasi yang selalu dilakukan tiap tengah dan akhir semester untuk setiap mata kuliah, yaitu ETS (Evaluasi Tengah Semester) dan juga EAS (Evaluasi Akhir Semester). Proses evaluasi ini adalah hal yang wajib dilakukan mahasiswa untuk mendapatkan nilai yang memuaskan pada setiap mata kuliah yang mereka jalani.
+Di ITS terdapat proses evaluasi yang selalu dilakukan tiap tengah dan akhir semester untuk setiap mata kuliah, yaitu ETS (Evaluasi Tengah Semester) dan juga EAS (Evaluasi Akhir Semester). Proses evaluasi ini adalah hal yang wajib dilakukan mahasiswa untuk mendapatkan nilai yang memuaskan pada setiap mata kuliah yang mereka jalani. Kode berikut akan melakukan simulasi ETS/EAS dari sudut pandang dosen dan juga mahasiswa.
 
 ## Class Diagram
 
@@ -114,7 +114,20 @@ Penjelasan:
 - Nilai disimpan berdasarkan nama ujian.
 - `LinkedHashMap` menjaga urutan input, jadi urutan data akan sesuai dengan kapan ujian diselesaikan, misal ujian strukdat sudah dinilai terlebih dahulu, maka data akan selalu pada posisi paling awal dari data yang lain.
 
-5. Simulasi ujian di `main`
+5. Perbedaan Ujian SKPB dan Departemen
+
+```java
+class UjianDepartemen extends Ujian {
+    private String jenisPenilaian;
+    private String deadline;
+}
+```
+
+Penjelasan:
+
+- Ujian Departemen memiliki bentuk ujian yang lebih fleksibel, bisa berupa ujian teori menggunakan kertas/komputer, mid project, presentasi, demo, dsb.
+
+6. Simulasi ujian di `main`
 
 ```java
 mahasiswa.login();
