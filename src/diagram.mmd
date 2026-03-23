@@ -1,0 +1,107 @@
+classDiagram
+direction TB
+
+class Ujian {
+    <<abstract>>
+    #nama: String
+    #tanggal: String
+    #status: String
+    #mataKuliah: String
+    #tempat: String
+
+    +Ujian(String nama, String tanggal, String mataKuliah, String tempat)
+    +getTempat(): String
+    +setTempat(String tempat): void
+    +getNama(): String
+    +setNama(String nama): void
+    +getMataKuliah(): String
+    +setMataKuliah(String mataKuliah): void
+    +getTanggal(): String
+    +setTanggal(String tanggal): void
+    +getStatus(): String
+    +mulaiUjian(): void
+    +selesaikanUjian(): void
+}
+
+class UjianSKPB {
+    -jumlahSoal: int
+    -durasiMenit: int
+
+    +UjianSKPB(String nama, String tanggal, String mataKuliah, String tempat, int jumlahSoal, int durasiMenit)
+    +getJumlahSoal(): int
+    +setJumlahSoal(int jumlah): void
+    +getDurasiMenit(): int
+    +setDurasiMenit(int durasi): void
+}
+
+class UjianDepartemen {
+    -jenisPenilaian: String
+    -deadline: String
+
+    +UjianDepartemen(String nama, String tanggal, String mataKuliah, String tempat, String jenisPenilaian, String deadline)
+    +getJenisPenilaian(): String
+    +setJenisPenilaian(String jenis): void
+    +getDeadline(): String
+    +setDeadline(String deadline): void
+}
+
+Ujian <|-- UjianSKPB
+Ujian <|-- UjianDepartemen
+
+class Orang {
+    <<abstract>>
+    #nama: String
+    #email: String
+    #loginAktif: boolean
+
+    +Orang(String nama, String email)
+    +getNama(): String
+    +setNama(String nama): void
+    +getEmail(): String
+    +setEmail(String email): void
+    +login(): void
+    +logout(): void
+    +lihatJadwalUjian(): void
+}
+
+class Mahasiswa {
+    -nrp: String
+    -angkatan: int
+    -semester: int
+    -departemen: String
+    -statusUjian: String
+    -daftarUjianAktif: List~Ujian~
+    -nilaiUjian: Map~String, Double~
+
+    +Mahasiswa(String nama, String email, String nrp, int angkatan, int semester, String departemen)
+    +daftarUjian(Ujian ujian): void
+    +kerjakanUjian(Ujian ujian): void
+    +submitUjian(Ujian ujian): void
+    +lihatNilai(): void
+    +terimaNilai(Ujian ujian, double nilai): void
+    +lihatJadwalUjian(): void
+    +getNrp(): String
+    +getAngkatan(): int
+    +getSemester(): int
+    +getDepartemen(): String
+    +getStatusUjian(): String
+}
+
+class Dosen {
+    -nidn: String
+    -jabatan: String
+    -mataKuliahAmpu: String
+
+    +Dosen(String nama, String email, String nidn, String jabatan, String mataKuliahAmpu)
+    +buatSoal(Ujian ujian): void
+    +inputNilai(Mahasiswa mahasiswa, Ujian ujian, double nilai): void
+    +awasiUjian(Ujian ujian): void
+    +validasiNilai(Mahasiswa mahasiswa, Ujian ujian): void
+    +lihatJadwalUjian(): void
+    +getNidn(): String
+    +getJabatan(): String
+    +getMataKuliahAmpu(): String
+}
+
+Orang <|-- Mahasiswa
+Orang <|-- Dosen
